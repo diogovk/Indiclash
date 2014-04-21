@@ -1,5 +1,9 @@
 package org.openintents.indiclash.sample.dictionaryapp;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,12 +28,27 @@ public class DictionaryApp extends Activity {
 			public void onClick(View v) {
 				Toast.makeText(DictionaryApp.this, "Adding word to flashcard app", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent();
-				intent.setAction("org.openintents.indiclash.CREATE_FLASHCARD");
-				// See http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
-				intent.putExtra("SOURCE_LANGUAGE", "ja");
-				intent.putExtra("TARGET_LANGUAGE", "fr");
-				intent.putExtra("SOURCE_TEXT", "日の出");
-				intent.putExtra("TARGET_TEXT", "Lever du soleil");
+				intent.setAction("org.openintents.action.CREATE_FLASHCARDS");
+				intent.putExtra("VERSION", 1);
+				intent.putExtra("DEFAULT_NOTE_TYPE", "Basic");
+				
+				ArrayList<HashMap<String, Serializable>> notes = new ArrayList<HashMap<String, Serializable>>();
+				HashMap<String, Serializable> note1 = new HashMap<String, Serializable>();
+				note1.put("SOURCE_TEXT", "夏");
+				note1.put("TARGET_TEXT", "summer");
+				String[] optional_parameters1 = new String[]{"なつ", "Common word", "Adverbial noun, Temporal noun"};
+				
+				note1.put("OPTIONAL_PARAMETERS", optional_parameters1);
+				
+				HashMap<String, Serializable> note2 = new HashMap<String, Serializable>();
+				note2.put("SOURCE_TEXT", "サマー");
+				note2.put("TARGET_TEXT", "summer");
+				String[] optional_parameters2 = new String[]{"サマー", "Common word", "Noun"};
+				
+				note2.put("OPTIONAL_PARAMETERS", optional_parameters2);
+				notes.add(note1);
+				notes.add(note2);
+				intent.putExtra("NOTES", notes);
 				startActivity(intent);
 			}
 		});

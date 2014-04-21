@@ -3,7 +3,10 @@
 	  package="org.openintents.indiclash.sample.flashcardsapp"
 	  android:versionCode="1"
 	  android:versionName="0.1">
-	<application android:label="Indiclash Flashcards app" android:icon="@drawable/icon">
+	<uses-sdk android:minSdkVersion="8"
+	    android:targetSdkVersion="19" />
+    
+	<application android:label="Indiclash Flashcards app" android:icon="@drawable/icon" android:allowBackup="true">
 		<activity android:name=".FlashcardsApp" android:label="Indiclash Flashcards app">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -17,11 +20,10 @@
 				If you develop a flashcard app, add this to your flashcard creation activity.
 			-->
 			<intent-filter>
-				<action android:name="org.openintents.indiclash.CREATE_FLASHCARD" />
+				<action android:name="org.openintents.action.CREATE_FLASHCARDS" />
 				<category android:name="android.intent.category.DEFAULT" />
 			</intent-filter>
 		</activity>
 
 	</application>
-	<uses-sdk android:minSdkVersion="3" />
 </manifest>
